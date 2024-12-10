@@ -16,10 +16,20 @@ const contactsSlice = createSlice({
         (contact) => contact.id !== action.payload
       );
     },
+    updateContact(state, action) {
+      const index = state.items.findIndex(
+        (contact) => contact.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+    },
   },
 });
 
 export const selectContacts = (state) => state.contacts.items;
 
-export const { addContact, deleteContact } = contactsSlice.actions;
+export const { addContact, deleteContact, updateContact } =
+  contactsSlice.actions;
+
 export default contactsSlice.reducer;
